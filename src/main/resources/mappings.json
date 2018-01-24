@@ -1,0 +1,30 @@
+{
+  "produtos": {
+    "properties": {
+      "autocomplete": {
+        "type": "text",
+        "analyzer": "autocomplete",
+        "search_analyzer": "autocomplete_search",
+        "fielddata": true
+      },
+      "descricao": {
+        "type": "text",
+        "copy_to": [
+          "voceQuisDizer",
+          "autocomplete"
+        ]
+      },
+      "voceQuisDizer": {
+        "type": "text",
+        "analyzer": "didYouMean"
+      },
+      "titulo": {
+        "type": "text",
+        "copy_to": [
+          "voceQuisDizer",
+          "autocomplete"
+        ]
+      }
+    }
+  }
+}

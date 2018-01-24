@@ -1,0 +1,62 @@
+{
+  "index": {
+    "analysis": {
+      "filter": {
+        "stemmer": {
+          "type": "stemmer",
+          "language": "brazilian"
+        },
+        "stopWords": {
+          "type": "stop",
+          "stopwords": [
+            "_brazilian_"
+          ]
+        }
+      },
+      "analyzer": {
+        "didYouMean": {
+          "filter": [
+            "lowercase",
+            "asciifolding"
+          ],
+          "char_filter": [
+            "html_strip"
+          ],
+          "type": "custom",
+          "tokenizer": "standard"
+        },
+        "autocomplete": {
+          "tokenizer": "autocomplete",
+          "filter": [
+            "lowercase"
+          ]
+        },
+        "autocomplete_search": {
+          "tokenizer": "lowercase"
+        },
+        "default": {
+          "filter": [
+            "lowercase",
+            "stopWords",
+            "stemmer"
+          ],
+          "char_filter": [
+            "html_strip"
+          ],
+          "type": "custom",
+          "tokenizer": "standard"
+        }
+      },
+      "tokenizer": {
+        "autocomplete": {
+          "type": "edge_ngram",
+          "min_gram": 2,
+          "max_gram": 10,
+          "token_chars": [
+            "letter"
+          ]
+        }
+      }
+    }
+  }
+}

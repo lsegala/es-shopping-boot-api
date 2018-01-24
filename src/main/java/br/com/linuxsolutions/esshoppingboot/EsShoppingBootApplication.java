@@ -35,9 +35,12 @@ public class EsShoppingBootApplication implements CommandLineRunner {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
+	@Autowired
+	private ElasticsearchTemplate elasticsearchTemplate;
+
 	@Bean
 	public Client client() throws UnknownHostException {
-		return new PreBuiltTransportClient(Settings.builder().put("cluster.name", "es-local").build())
+		return new PreBuiltTransportClient(Settings.builder().build())
 				.addTransportAddress(
 						new InetSocketTransportAddress(
 								InetAddress.getByName("localhost"),
@@ -96,7 +99,10 @@ public class EsShoppingBootApplication implements CommandLineRunner {
 
 	@Override
 	public void run(String... args) throws Exception {
-		this.produtoRepository.deleteAll();
+		elasticsearchTemplate.deleteIndex(Produto.class);
+		elasticsearchTemplate.createIndex(Produto.class);
+		elasticsearchTemplate.putMapping(Produto.class);
+
 		carregarItens("computador");
 		carregarItens("notebook");
 		carregarItens("celular");

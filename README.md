@@ -1,0 +1,1 @@
+Projeto que faz parte do [es-shopping-boot-web](https://github.com/lsegala/es-shopping-boot-web) para realizar carga de dados
